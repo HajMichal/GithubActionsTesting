@@ -12,7 +12,8 @@ jobs:
   build:
 
     # The type of runner that the job will run on.
-    runs-on: [ code-linux, code-default, self-hosted ]
+    # runs-on: [ code-linux, code-default, self-hosted ]
+    runs-on: self-hosted
 
     # Sequence of tasks that will be executed
     steps:
