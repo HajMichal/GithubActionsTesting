@@ -1,0 +1,31 @@
+name: CI
+
+# List of events to triggers this workflows
+on:
+  push:
+  pull_request:
+
+# Define jobs that can run sequentially or in parallel
+jobs:
+
+  # Job name
+  build:
+
+    # The type of runner that the job will run on.
+    runs-on: [ code-linux, code-default ]
+
+    # Sequence of tasks that will be executed
+    steps:
+
+      # Clone your repository into current directory
+      - uses: actions/checkout@v3
+
+      # Runs a single command
+      - name: Run a one-line script
+        run: echo "Hello, world!"
+
+      # Runs a set of commands
+      - name: Run a multi-line script
+        run: |
+          echo "Add other actions to build,"
+          echo "test, and deploy your project."
