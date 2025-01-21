@@ -6,6 +6,9 @@ on:
   pull_request:
 
 # Define jobs that can run sequentially or in parallel
+env:
+  SAMPLE_VAR: This is sample variable
+
 jobs:
 
   # Job name
@@ -14,6 +17,9 @@ jobs:
 
     # Sequence of tasks that will be executed
     steps:
+
+      - name: Display variable
+        run: echo "VARIABLE---> $SAMPLE_VAR"
 
         # Debug message
       - name: Run a debug message
