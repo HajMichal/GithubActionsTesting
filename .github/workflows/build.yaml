@@ -29,7 +29,7 @@ jobs:
 
       - name: The demo step has failed
         if: ${{ failure() && steps.demo.conclusion == 'failure' }}
-        run: echo "workflow failed"
+        run: echo "workflow failed ${{ steps.demo.conclusion }}"
 
       # Runs a single command
       - name: Run a one-line script
