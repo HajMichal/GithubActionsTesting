@@ -10,9 +10,7 @@ jobs:
 
   # Job name
   build:
-
     runs-on: self-hosted
-
     # Sequence of tasks that will be executed
     steps:
 
