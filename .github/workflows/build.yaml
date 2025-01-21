@@ -11,9 +11,6 @@ jobs:
   # Job name
   build:
     runs-on: self-hosted
-    defaults:
-      run:
-        shell: sh
 
     # Sequence of tasks that will be executed
     steps:
@@ -25,9 +22,6 @@ jobs:
         # # Error
       - name: Run an error
         run: echo "::error file=main.tsx, line=10::Missing semicolon"
-
-      - name: "Run a script"
-        run: ./scripts/sample.sh
 
       # Runs a single command
       - name: Run a one-line script
