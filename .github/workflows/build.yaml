@@ -22,6 +22,7 @@ jobs:
       - name: Run an error
         run: echo "::error file=main.tsx, line=10::Missing semicolon"
 
+      - run: npm install
       - run: npm run test
 
       # Runs a single command
