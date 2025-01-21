@@ -19,7 +19,7 @@ jobs:
     steps:
 
       - name: Display variable
-        run: echo "VARIABLE---> $SAMPLE_VAR"
+        run: echo "VARIABLE--->" $SAMPLE_VAR
 
         # Debug message
       - name: Run a debug message
