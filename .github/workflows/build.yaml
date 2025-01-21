@@ -24,7 +24,7 @@ jobs:
         run: echo "::error file=main.tsx, line=10::Missing semicolon"
 
       - name: "Run a script"
-        run: ./scripts/sample.bash
+        run: ./scripts/sample.sh
 
       # Runs a single command
       - name: Run a one-line script
