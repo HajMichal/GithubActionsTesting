@@ -15,12 +15,12 @@ jobs:
     steps:
 
         # Debug message
-        # name: Run a debug message
-        # run: echo "::debug::Here is your debug message"
+      - name: Run a debug message
+        run: echo "::debug::Here is your debug message"
         
         # # Error
-        # name: Run an error
-        # run: echo "::error file=main.tsx, line=10::Missing semicolon"
+      - name: Run an error
+        run: echo "::error file=main.tsx, line=10::Missing semicolon"
 
       # Runs a single command
       - name: Run a one-line script
