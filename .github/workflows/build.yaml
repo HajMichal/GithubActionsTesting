@@ -11,7 +11,6 @@ jobs:
   # Job name
   build:
 
-    # The type of runner that the job will run on.
     runs-on: self-hosted
 
     # Sequence of tasks that will be executed
