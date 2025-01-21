@@ -24,12 +24,12 @@ jobs:
         run: echo "::error file=main.tsx, line=10::Missing semicolon"
 
       - name: Failing step
-        id: demo
+        id: demoTest
         run: exit 1
 
       - name: The demo step has failed
-        if: ${{ failure() && steps.demo.conclusion == 'failure' }}
-        run: echo "workflow failed ${{ steps.demo.conclusion }}"
+        if: ${{ failure() && steps.demoTest.conclusion == 'failure' }}
+        run: echo "workflow failed ${{ steps.demoTest }}"
 
       # Runs a single command
       - name: Run a one-line script
