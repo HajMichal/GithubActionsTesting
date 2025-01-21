@@ -1,6 +1,6 @@
 name: CI
 
-# List of events to triggers this workflows
+# List of events to triggers this workflows edit cOmment
 on:
   push:
   pull_request:
