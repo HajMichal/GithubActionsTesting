@@ -11,6 +11,9 @@ jobs:
   # Job name
   build:
     runs-on: self-hosted
+    defaults:
+      run:
+        shell: powershell
 
     # Sequence of tasks that will be executed
     steps:
