@@ -15,15 +15,15 @@ jobs:
   build:
     runs-on: self-hosted
     outputs:
-      example: ${{ steps.passVariable.outputs.greeting }}
+      output1: ${{ steps.passvar.outputs.test }}
     # Sequence of tasks that will be executed
     steps:
 
       - name: Display variable
         run: echo "VARIABLE---> $SAMPLE_VAR"
       
-      - id: "passVariable"
-        run: echo "greeting=HelloWorld" >> "$GITHUB_OUTPUT"
+      - id: "passvar"
+        run: echo "test=hello" >> "$GITHUB_OUTPUT"
 
         # Debug message
       - name: Run a debug message
