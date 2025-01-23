@@ -11,19 +11,27 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Checkout source repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
+          repository: github.sec.samsung.net/michal-haj/LearningGHActions/
+          ref: main
           fetch-depth: 0
+        
+      - name: Configure Git
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@samsung.com"
+
 
       - name: Push to destination repository
         env:
           SOURCE_REPO: ${{ github.repository }}
           DESTINATION_REPO: "michal.haj/repoToSync"
           PAT: ${{ secrets.PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
         run: |
           git remote add destination https://github.sec.samsung.net/${DESTINATION_REPO}.git
           git push destination main:main --force
-
 
 # jobs:
 # on:
