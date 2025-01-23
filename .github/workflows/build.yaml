@@ -21,7 +21,7 @@ jobs:
 
       - name: Display variable
         id: "printVariable"
-        run: echo "VARIABLE---> $SAMPLE_VAR" >> "$GITHUB_OUTPUT"
+        run: echo "VARIABLE---> $SAMPLE_VAR" >> "passing variables to other job -.-"
 
         # Debug message
       - name: Run a debug message
