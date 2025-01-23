@@ -30,7 +30,7 @@ jobs:
           PAT: ${{ secrets.PAT }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
         run: |
-          git remote remove destination || true
+          git remote remove destination 
           git remote add destination https://github.sec.samsung.net/${DESTINATION_REPO}.git
           git push destination main:main --force
 
