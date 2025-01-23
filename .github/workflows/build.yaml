@@ -10,105 +10,85 @@ env:
   SAMPLE_VAR: This is sample variable
 
 jobs:
-  job1:
+
+  test:
+    runs-on: self-hosted 
+    steps:
+    - name: Display variable
+      run: echo "${{ github.ref }}"
+      
+  # przetestowac github.ref
+
+  # Job name
+  build:
     runs-on: self-hosted
     outputs:
-      output_1: ${{ steps.gen_output.outputs.output_1 }}
-      output_2: ${{ steps.gen_output.outputs.output_2 }}
-      output_3: ${{ steps.gen_output.outputs.output_3 }}
-    strategy:
-      matrix:
-        version: [1, 2, 3]
+      output1: ${{ steps.passvar.outputs.test }}
+    # Sequence of tasks that will be executed
     steps:
-      - name: Generate output
-        id: gen_output
-        run: |
-          version="${{ matrix.version }}"
-          echo "output_${version}=${version}" >> "$GITHUB_OUTPUT"
-  job2:
-    runs-on: self-hosted
-    needs: [job1]
-    steps:
-      # Will show
-      # {
-      #   "output_1": "1",
-      #   "output_2": "2",
-      #   "output_3": "3"
-      # }
-      - run: echo '${{ toJSON(needs.job1.outputs) }}'
 
-# jobs:
-
-#   # Job name
-#   build:
-#     runs-on: self-hosted
-#     outputs:
-#       output1: ${{ steps.passvar.outputs.test }}
-#     # Sequence of tasks that will be executed
-#     steps:
-
-#       - name: Display variable
-#         run: echo "VARIABLE---> $SAMPLE_VAR"
+      - name: Display variable
+        run: echo "VARIABLE---> $SAMPLE_VAR"
       
-#       - id: "passvar"
-#         run: echo "test=hello" >> "$GITHUB_OUTPUT"
+      - id: "passvar"
+        run: echo "test=hello" >> "$GITHUB_OUTPUT"
 
-#         # Debug message
-#       - name: Run a debug message
-#         run: echo "::debug::Here is your debug message"
+        # Debug message
+      - name: Run a debug message
+        run: echo "::debug::Here is your debug message"
         
-#         # # Error
-#       - name: Run an error
-#         run: echo "::error file=main.tsx, line=10::Missing semicolon"
+        # # Error
+      - name: Run an error
+        run: echo "::error file=main.tsx, line=10::Missing semicolon"
 
-#       - name: The demo step has failed
-#         if: ${{ failure() && steps.demoTest.conclusion == 'failure' }}
-#         run: echo "workflow failed ${{ steps.demoTest }}"
+      - name: The demo step has failed
+        if: ${{ failure() && steps.demoTest.conclusion == 'failure' }}
+        run: echo "workflow failed ${{ steps.demoTest }}"
 
-#       # Runs a single command
-#       - name: Run a one-line script
-#         run: echo "Hello, world!"
+      # Runs a single command
+      - name: Run a one-line script
+        run: echo "Hello, world!"
 
-#       # Runs a set of commands
-#       - name: Run a multi-line script
-#         run: |
-#           echo "Add other actions to build,"
-#           echo "test, and deploy your project."
+      # Runs a set of commands
+      - name: Run a multi-line script
+        run: |
+          echo "Add other actions to build,"
+          echo "test, and deploy your project."
 
-#       - name: The job has succeeded
-#         if: ${{ success() }}
-#         run: echo "workflow succeeded" 
+      - name: The job has succeeded
+        if: ${{ success() }}
+        run: echo "workflow succeeded" 
 
 
-#   dump_contexts_to_log:
-#     runs-on: self-hosted
-#     needs: build
-#     steps:
-#       - name: "Use variable from build job"
-#         env:
-#           OUTPUT1: ${{needs.build.outputs.example}}
-#         run: echo "$OUTPUT1"
-#       - name: Dump GitHub context
-#         env:
-#           GITHUB_CONTEXT: ${{ toJson(github) }}
-#         run: echo "$GITHUB_CONTEXT"
-#       - name: Dump job context
-#         env:
-#           JOB_CONTEXT: ${{ toJson(job) }}
-#         run: echo "$JOB_CONTEXT"
-#       - name: Dump steps context
-#         env:
-#           STEPS_CONTEXT: ${{ toJson(steps) }}
-#         run: echo "$STEPS_CONTEXT"
-#       - name: Dump runner context
-#         env:
-#           RUNNER_CONTEXT: ${{ toJson(runner) }}
-#         run: echo "$RUNNER_CONTEXT"
-#       - name: Dump strategy context
-#         env:
-#           STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-#         run: echo "$STRATEGY_CONTEXT"
-#       - name: Dump matrix context
-#         env:
-#           MATRIX_CONTEXT: ${{ toJson(matrix) }}
-#         run: echo "$MATRIX_CONTEXT"
+  dump_contexts_to_log:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - name: "Use variable from build job"
+        env:
+          OUTPUT1: ${{needs.build.outputs.example}}
+        run: echo "$OUTPUT1"
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
