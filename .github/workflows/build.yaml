@@ -31,7 +31,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
         run: |
           git remote remove destination 
-          git remote add destination https://github.sec.samsung.net/${DESTINATION_REPO}.git
+          git remote add destination https://${{secrets.ENTERPRISE_TOKEN}}@github.sec.samsung.net/${DESTINATION_REPO}.git
           git push destination main:main --force
 
 # jobs:
