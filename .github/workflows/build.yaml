@@ -15,7 +15,7 @@ jobs:
     runs-on: self-hosted 
     steps:
     - name: Display variable
-      run: echo "${{ github.ref }}"
+      run: echo "${{ github.actor }}"
       
   # przetestowac github.ref
 
