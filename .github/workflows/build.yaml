@@ -23,7 +23,7 @@ jobs:
         run: |
           git config --global user.name "michal.haj"
           git config --global user.email "michal.haj@samsung.com"
-          git remote add destination https://${PAT}@github.com/${DESTINATION_REPO}.git
+          git remote add destination https://github.sec.samsung.net/${DESTINATION_REPO}.git
           git push destination main:main --force
 
 
