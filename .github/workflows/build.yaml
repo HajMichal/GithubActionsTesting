@@ -18,7 +18,7 @@ jobs:
       - name: Push to destination repository
         env:
           SOURCE_REPO: ${{ github.repository }}
-          DESTINATION_REPO: "michal.haj/nazwa-docelowego-repozytorium"
+          DESTINATION_REPO: "michal.haj/repoToSync"
           PAT: ${{ secrets.PAT }}
         run: |
           git config --global user.name "michal.haj"
