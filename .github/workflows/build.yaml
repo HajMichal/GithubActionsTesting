@@ -21,7 +21,7 @@ jobs:
           DESTINATION_REPO: "michal.haj/repoToSync"
           PAT: ${{ secrets.PAT }}
         run: |
-          git config --global user.name "michal.haj"
+          git config --global user.name "Michal Haj/Multichannel Video Services (PLT) /SRPOL/Associate/Samsung Electronics"
           git config --global user.email "michal.haj@samsung.com"
           git remote add destination https://github.sec.samsung.net/${DESTINATION_REPO}.git
           git push destination main:main --force
