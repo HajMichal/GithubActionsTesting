@@ -25,21 +25,17 @@ jobs:
       
       - name: Remove .github folder to avoid copying workflows (Windows)
         run: |
-          if (Test-Path -Path .github) {
             git rm -r --cached .github 
             git commit -m "Remove .github folder"
-          } else {
-            Write-Host ".github folder does not exist"
-          }
 
       - name: Push to destination repository
         env:
           SOURCE_REPO: ${{ github.repository }}
           DESTINATION_REPO: https://github.com/HajMichal/GithubActionsTesting
         run: |
-          echo "Synchronize main branch from $SOURCE_REPO with $DESTINATION_REPO"
+          echo "Synchronize main branch from %SOURCE_REPO% with %DESTINATION_REPO%"
           git remote remove destination
-          git remote add destination https://github.com/HajMichal/GithubActionsTesting
+          git remote add destination %DESTINATION_REPO%
           git push destination main:main --force
 
 
