@@ -29,7 +29,7 @@ jobs:
       - name: Push to destination repository
         env:
           SOURCE_REPO: ${{ github.repository }}
-          DESTINATION_REPO: "https://github.com/HajMichal/GithubActionsTesting"
+          DESTINATION_REPO: https://github.com/HajMichal/GithubActionsTesting
         run: |
           echo "Synchronize main branch from $SOURCE_REPO with $DESTINATION_REPO"
           git remote remove destination
