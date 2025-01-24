@@ -14,24 +14,18 @@ jobs:
         with:
           repository: ${{ github.repository }}
           ref: main
-          fetch-depth: 0
-        
-      # - name: Configure Git
-      #   run: |
-      #     git config user.name "${{ github.actor }}"
-      #     git config user.email "${{ github.actor }}@samsung.com"
-
+          fetch-depth: 1
       
-      - name: Remove .github folder to avoid copying workflows (Windows)
+      - name: Remove .github folder to avoid copying workflows
         run: |
             git rm -r --cached .github 
             git commit -m "Remove .github folder"
 
-      - name: Push to destination repository
-        run: |
-          git remote remove destination
-          git remote add destination https://github.com/HajMichal/GithubActionsTesting
-          git push destination main:main --force
+      # - name: Push to destination repository
+      #   run: |
+      #     git remote remove destination
+      #     git remote add destination https://github.com/HajMichal/GithubActionsTesting
+      #     git push destination main:main --force
 
 
 # jobs:
