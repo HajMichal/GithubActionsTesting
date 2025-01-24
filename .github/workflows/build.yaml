@@ -5,10 +5,6 @@ on:
     branches:
       - main
 
-env: 
-  SOURCE_REPO: ${{ github.repository }}
-  DESTINATION_REPO: https://github.com/HajMichal/GithubActionsTesting
-
 jobs:
   sync:
     runs-on: self-hosted
@@ -34,7 +30,7 @@ jobs:
       - name: Push to destination repository
         run: |
           git remote remove destination
-          git remote add destination "$DESTINATION_REPO"
+          git remote add destination https://github.com/HajMichal/GithubActionsTesting
           git push destination main:main --force
 
 
