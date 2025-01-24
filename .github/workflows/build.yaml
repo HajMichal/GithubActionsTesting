@@ -4,12 +4,16 @@ on:
   workflow_dispatch
 
 jobs:
-  runTests:
+  tests:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout node
+      - name: Checkout source repository
         uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+          ref: main
+          fetch-depth: 1
 
       - name: Use Node.js v22.11
         uses: actions/setup-node@v3
@@ -23,10 +27,10 @@ jobs:
       - name: Run tests
         run: npm test
 
-        
+
   sync:
     runs-on: self-hosted
-
+    needs: tests
     steps:
       - name: Checkout source repository
         uses: actions/checkout@v4
