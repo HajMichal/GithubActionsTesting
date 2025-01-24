@@ -17,6 +17,12 @@ jobs:
           ref: main
           fetch-depth: 1
       
+      - name: Fetch all necessary refs
+        run: |
+          git fetch --unshallow  # This will fetch the remaining refs without fetching full history
+          git fetch origin main  # Fetch additional references, like the latest commit from 'main'
+
+
       - name: Remove .github folder to avoid copying workflows
         run: |
             git rm -r --cached .github 
