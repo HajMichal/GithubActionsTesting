@@ -17,21 +17,23 @@ jobs:
           ref: main
           fetch-depth: 0
         
-      - name: Configure Git
-        run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@samsung.com"
+      # - name: Configure Git
+      #   run: |
+      #     git config user.name "${{ github.actor }}"
+      #     git config user.email "${{ github.actor }}@samsung.com"
 
+      - name: Remove .github folder to avoid copying workflows
+        run: |
+          rm -rf .github
 
       - name: Push to destination repository
         env:
           SOURCE_REPO: ${{ github.repository }}
-          DESTINATION_REPO: "michal.haj/repoToSync"
-          PAT: ${{ secrets.PAT }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          DESTINATION_REPO: "https://github.com/HajMichal/GithubActionsTesting"
         run: |
+          echo "Synchronize main branch from $SOURCE_REPO with $DESTINATION_REPO"
           git remote remove destination
-          git remote add destination https://github.com/HajMichal/GithubActionsTesting
+          git remote add destination $DESTINATION_REPO
           git push destination main:main --force
 
 
