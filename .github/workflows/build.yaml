@@ -22,9 +22,17 @@ jobs:
       #     git config user.name "${{ github.actor }}"
       #     git config user.email "${{ github.actor }}@samsung.com"
 
+      
       - name: Remove .github folder to avoid copying workflows (Windows)
         run: |
-          if (Test-Path .github) { Remove-Item -Recurse -Force .github }
+          if (Test-Path -Path .github) {
+            Write-Host "Removing .github folder"
+            Remove-Item -Recurse -Force .github
+            git rm -r --cached .github  # Usuwa folder z repozytorium git
+            git commit -m "Remove .github folder"
+          } else {
+            Write-Host ".github folder does not exist"
+          }
 
       - name: Push to destination repository
         env:
