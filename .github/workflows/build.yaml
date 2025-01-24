@@ -22,9 +22,9 @@ jobs:
       #     git config user.name "${{ github.actor }}"
       #     git config user.email "${{ github.actor }}@samsung.com"
 
-      - name: Remove .github folder to avoid copying workflows
+      - name: Remove .github folder to avoid copying workflows (Windows)
         run: |
-          rm -rf .github
+          if (Test-Path .github) { Remove-Item -Recurse -Force .github }
 
       - name: Push to destination repository
         env:
