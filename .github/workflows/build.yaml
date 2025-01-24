@@ -8,13 +8,14 @@ on:
 jobs:
   sync:
     runs-on: self-hosted
+
     steps:
       - name: Checkout source repository
         uses: actions/checkout@v4
         with:
           repository: ${{ github.repository }}
           ref: main
-          fetch-depth: 1
+          fetch-depth: 0
       
       - name: Remove .github folder to avoid copying workflows
         run: |
