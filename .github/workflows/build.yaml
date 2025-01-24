@@ -4,7 +4,10 @@ on:
   push:
     branches:
       - main
-# Define jobs that can run sequentially or in parallel
+
+env: 
+  SOURCE_REPO: ${{ github.repository }}
+  DESTINATION_REPO: https://github.com/HajMichal/GithubActionsTesting
 
 jobs:
   sync:
@@ -29,12 +32,9 @@ jobs:
             git commit -m "Remove .github folder"
 
       - name: Push to destination repository
-        env:
-          SOURCE_REPO: ${{ github.repository }}
-          DESTINATION_REPO: https://github.com/HajMichal/GithubActionsTesting
         run: |
           git remote remove destination
-          git remote add destination "$DESTINATION_REPO"
+          git remote add destination $DESTINATION_REPO
           git push destination main:main --force
 
 
