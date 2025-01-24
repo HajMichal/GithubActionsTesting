@@ -33,9 +33,8 @@ jobs:
           SOURCE_REPO: ${{ github.repository }}
           DESTINATION_REPO: https://github.com/HajMichal/GithubActionsTesting
         run: |
-          echo "Synchronize main branch from $SOURCE_REPO with $DESTINATION_REPO"
           git remote remove destination
-          git remote add destination $DESTINATION_REPO
+          git remote add destination "$DESTINATION_REPO"
           git push destination main:main --force
 
 
