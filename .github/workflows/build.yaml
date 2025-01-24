@@ -26,9 +26,7 @@ jobs:
       - name: Remove .github folder to avoid copying workflows (Windows)
         run: |
           if (Test-Path -Path .github) {
-            Write-Host "Removing .github folder"
-            Remove-Item -Recurse -Force .github
-            git rm -r --cached .github  # Usuwa folder z repozytorium git
+            git rm -r --cached .github 
             git commit -m "Remove .github folder"
           } else {
             Write-Host ".github folder does not exist"
