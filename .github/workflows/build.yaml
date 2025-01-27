@@ -15,10 +15,10 @@ jobs:
           ref: main
           fetch-depth: 1
 
-      - name: Use Node.js v22.11
+      - name: Use Node.js v22.3
         uses: actions/setup-node@v3
         with:
-          node-version: 22.11
+          node-version: 22.3
           cache: 'npm'
 
       - name: Install dependencies
