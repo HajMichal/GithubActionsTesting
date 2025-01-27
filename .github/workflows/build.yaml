@@ -37,7 +37,7 @@ jobs:
         with:
           repository: ${{ github.repository }}
           ref: main
-          fetch-depth: 1
+          fetch-depth: 0
       
       - name: Fetch all necessary refs
         run: |
@@ -53,9 +53,9 @@ jobs:
       - name: Push to destination repository
         run: |
           git remote -v
-          git remote remove destination || echo "Remote 'destination' not found"
-          git remote add destination https://github.com/HajMichal/GithubActionsTesting
-          git push destination main:main --force
+          git remote remove destination_linux || echo "Remote 'destination_linux' not found"
+          git remote add destination_linux https://github.com/HajMichal/GithubActionsTesting
+          git push destination_linux main:main --force
 
 
 # jobs:
