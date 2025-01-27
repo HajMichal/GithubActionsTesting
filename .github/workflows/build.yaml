@@ -52,7 +52,6 @@ jobs:
 
       - name: Push to destination repository
         run: |
-          git remote remove destination
           git remote add destination https://github.com/HajMichal/GithubActionsTesting
           git push destination main:main --force
 
