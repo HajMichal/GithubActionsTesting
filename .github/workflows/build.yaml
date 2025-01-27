@@ -37,7 +37,7 @@ jobs:
         with:
           repository: ${{ github.repository }}
           ref: main
-          fetch-depth: 0
+          fetch-depth: 1
       
       - name: Fetch all necessary refs
         run: |
