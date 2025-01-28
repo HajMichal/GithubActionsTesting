@@ -86,7 +86,7 @@ jobs:
             custom_payload: |
                 {
                   attachments: [{
-                    color: ${process.env.TESTS_RESULT} === 'success' && ${process.env.SYNC_RESULT} === 'success'  ? 'good' : 'danger',
+                    color: '${process.env.TESTS_RESULT}' === 'success' && '${process.env.SYNC_RESULT}' === 'success'  ? 'good' : '${process.env.TESTS_RESULT}' === 'failure' || '${process.env.SYNC_RESULT}' === 'failure' ? 'danger' : 'warning',
                     text: `
                     \n**Action: **[${process.env.TRIGGER}](${process.env.ACTION_URL})\n**By:** [${process.env.USER}](${process.env.USER_URL})\n**Branch:** ${process.env.BRANCH}\n**Repo:** [${process.env.REPO}](${process.env.REPO_URL})\n**Tests: ** ${process.env.TESTS_RESULT}\n**Synchronization: ** ${process.env.SYNC_RESULT}`
                   }]
