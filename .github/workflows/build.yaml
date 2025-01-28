@@ -59,12 +59,12 @@ jobs:
 
       - name: Push to destination repository
         run: |
-          git remote -v
-          git remote remove destination || echo "Remote 'destination' not found"
-          git remote add destination git@github.com:HajMichal/GithubActionsTesting.git
-          git push destination main:main --force
+          git remote set-url origin git@github.com:HajMichal/GithubActionsTesting.git
+          git push origin main        
+        # git remote -v
+        # git remote remove destination || echo "Remote 'destination' not found"
         # git remote add destination https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/HajMichal/GithubActionsTesting
-  
+        # git push destination main:main --force
   notify:
     runs-on: self-hosted
     if: ${{ always() }}
