@@ -53,7 +53,8 @@ jobs:
 
       - name: Setup SSH
         run: |
-          chmod 600 ${{ secrets.DEPLOY_KEY }}
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/ghActionsTest
+          chmod 600 ~/.ssh/ghActionsTest
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       - name: Push to destination repository
