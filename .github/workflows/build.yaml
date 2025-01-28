@@ -31,15 +31,6 @@ jobs:
   sync:
     runs-on: self-hosted
     needs: tests
-    env:
-        WEBHOOK: ${{ secrets.MM_WEBHOOK_URL }}
-        WORKFLOW: ${{ github.workflow }}
-        ACTION: ${{ github.event.head_commit.message }}
-        ACTION_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        REPO: ${{ github.repository }}
-        REPO_URL: ${{ github.server_url }}/${{ github.repository }}
-        USER: ${{ github.triggering_actor }}
-        USER_URL: ${{ github.server_url }}/${{ github.triggering_actor }}
 
     steps:
       - name: Checkout source repository
@@ -71,6 +62,16 @@ jobs:
     runs-on: self-hosted
     if: ${{ always() }}
     needs: [tests, sync]
+
+    env:
+      WEBHOOK: ${{ secrets.MM_WEBHOOK_URL }}
+      WORKFLOW: ${{ github.workflow }}
+      ACTION: ${{ github.event.head_commit.message }}
+      ACTION_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      REPO: ${{ github.repository }}
+      REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+      USER: ${{ github.triggering_actor }}
+      USER_URL: ${{ github.server_url }}/${{ github.triggering_actor }}
     steps:
       - name: Run echo
         run: echo '${{ needs.tests.outputs }}'
@@ -87,7 +88,7 @@ jobs:
                     text: `
                     \n**Action: **[${{ github.event_name }}](${process.env.ACTION_URL})
                     \n**By:** [${process.env.USER}](${process.env.USER_URL})
-                    \n**Branch:** '${ github.ref_name }'
+                    \n**Branch:** '${{ github.ref_name }}'
                     \n**Repo:** [${process.env.REPO}](${process.env.REPO_URL})
                     \n**Synchronization: ** ${{ needs.sync.result }}`,
                   }]
