@@ -90,7 +90,7 @@ jobs:
                     **By:** [${process.env.USER}](${process.env.USER_URL})
                     **Branch:** '${{ github.ref_name }}'
                     **Repo:** [${process.env.REPO}](${process.env.REPO_URL})
-                    **Synchronization: ** ${{ needs.tests.result === 'success' }} ? ${{ needs.sync.result === 'success' }} ? 'success' : 'failure' : 'failure'`,
+                    **Synchronization: ** ${{ needs.tests.result }} === 'success' ? ${{ needs.sync.result }} === 'success' ? 'success' : 'failure' : 'failure'`,
                   }]
                 }
         env:
