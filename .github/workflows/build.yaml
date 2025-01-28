@@ -85,7 +85,11 @@ jobs:
                   attachments: [{
                     color: '${{ needs.tests.result }}' === 'success' && '${{ needs.sync.result }}' === 'success'  ? 'good' : '${{ needs.tests.result }}' === 'failure' || '${{ needs.sync.result }}' === 'failure' ? 'danger' : 'warning',
                     text: `
-                    \n**Action: **[${{ github.event_name }}](${process.env.ACTION_URL})\n**By:** [${process.env.USER}](${process.env.USER_URL})\n**Branch:** main\n**Repo:** [${process.env.REPO}](${process.env.REPO_URL})\n**${{ job.status }} in:** ${process.env.AS_TOOK}`,
+                    \n**Action: **[${{ github.event_name }}](${process.env.ACTION_URL})
+                    \n**By:** [${process.env.USER}](${process.env.USER_URL})
+                    \n**Branch:** '${ github.ref_name }'
+                    \n**Repo:** [${process.env.REPO}](${process.env.REPO_URL})
+                    \n**Synchronization: ** ${{ needs.sync.result }}`,
                   }]
                 }
         env:
