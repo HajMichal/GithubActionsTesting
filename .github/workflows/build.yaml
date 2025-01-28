@@ -78,7 +78,7 @@ jobs:
                   attachments: [{
                     color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
                     text: `
-                    \n**Action: **[${{ github.event_name }}](${process.env.ACTION_URL})\n**By:** [${process.env.USER}](${process.env.USER_URL})\n**Pull request:** ${'${{ github.event_name }}' === 'push' ?  'None' : '[${{github.event.pull_request.title}}](${{github.event.pull_request.html_url}})'}\n**Branch:** ${'${{ github.event_name }}' === 'push' ? '[main](${{ github.server_url }}/${{ github.repository }}/tree/main)' : '[${{ github.head_ref }}](${{ github.server_url }}/${{ github.repository }}/tree/${{ github.head_ref }})'}\n**Repo:** [${process.env.REPO}](${process.env.REPO_URL})\n**${{ job.status }} in:** ${process.env.AS_TOOK}`,
+                    \n**Action: **[${{ github.event_name }}](${process.env.ACTION_URL})\n**By:** [${process.env.USER}](${process.env.USER_URL})\n**Branch:**main\n**Repo:** [${process.env.REPO}](${process.env.REPO_URL})\n**${{ job.status }} in:** ${process.env.AS_TOOK}`,
                   }]
                 }
         env:
