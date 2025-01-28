@@ -66,7 +66,14 @@ jobs:
           git remote remove destination || echo "Remote 'destination' not found"
           git remote add destination https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/HajMichal/GithubActionsTesting
           git push destination main:main --force
-
+  
+  notify:
+    runs-on: self-hosted
+    if: ${{ always() }}
+    needs: [tests, sync]
+    steps:
+      - name: Run echo
+        run: echo ${{ tests.outputs }}
       - name: Notify to Mchat
         if: always()
         uses: CODE-Actions/8398a7-action-slack@v3
@@ -76,7 +83,7 @@ jobs:
             custom_payload: |
                 {
                   attachments: [{
-                    color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                    color: '${{ tests.result }}' === 'success' && '${{ sync.result }}' === 'success'  ? 'good' : '${{ tests.result }}' === 'failure' || '${{ sync.result }}' === 'failure' ? 'danger' : 'warning',
                     text: `
                     \n**Action: **[${{ github.event_name }}](${process.env.ACTION_URL})\n**By:** [${process.env.USER}](${process.env.USER_URL})\n**Branch:** main\n**Repo:** [${process.env.REPO}](${process.env.REPO_URL})\n**${{ job.status }} in:** ${process.env.AS_TOOK}`,
                   }]
