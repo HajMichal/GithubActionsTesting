@@ -73,7 +73,7 @@ jobs:
     needs: [tests, sync]
     steps:
       - name: Run echo
-        run: echo ${{ tests.outputs }}
+        run: echo '${{ tests.outputs }}'
       - name: Notify to Mchat
         if: always()
         uses: CODE-Actions/8398a7-action-slack@v3
