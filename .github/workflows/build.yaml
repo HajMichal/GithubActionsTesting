@@ -31,6 +31,16 @@ jobs:
   sync:
     runs-on: self-hosted
     needs: tests
+    env:
+        WEBHOOK: ${{ secrets.MM_WEBHOOK_URL }}
+        WORKFLOW: ${{ github.workflow }}
+        ACTION: ${{ github.event.head_commit.message }}
+        ACTION_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        REPO: ${{ github.repository }}
+        REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        USER: ${{ github.triggering_actor }}
+        USER_URL: ${{ github.server_url }}/${{ github.triggering_actor }}
+
     steps:
       - name: Checkout source repository
         uses: actions/checkout@v4
@@ -56,8 +66,23 @@ jobs:
           git remote remove destination || echo "Remote 'destination' not found"
           git remote add destination https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/HajMichal/GithubActionsTesting
           git push destination main:main --force
-        # git remote add destination https://github.com/HajMichal/GithubActionsTesting
 
+      - name: Notify to Mchat
+        if: always()
+        uses: CODE-Actions/8398a7-action-slack@v3
+        with:
+            status: custom
+            fields: job,took
+            custom_payload: |
+                {
+                  attachments: [{
+                    color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                    text: `
+                    \n**Action: **[${{ github.event_name }}](${process.env.ACTION_URL})\n**By:** [${process.env.USER}](${process.env.USER_URL})\n**Pull request:** ${'${{ github.event_name }}' === 'push' ?  'None' : '[${{github.event.pull_request.title}}](${{github.event.pull_request.html_url}})'}\n**Branch:** ${'${{ github.event_name }}' === 'push' ? '[main](${{ github.server_url }}/${{ github.repository }}/tree/main)' : '[${{ github.head_ref }}](${{ github.server_url }}/${{ github.repository }}/tree/${{ github.head_ref }})'}\n**Repo:** [${process.env.REPO}](${process.env.REPO_URL})\n**${{ job.status }} in:** ${process.env.AS_TOOK}`,
+                  }]
+                }
+        env:
+            SLACK_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
 
 # jobs:
 # on:
