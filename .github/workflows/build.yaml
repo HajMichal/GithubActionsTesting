@@ -74,7 +74,7 @@ jobs:
       USER_URL: ${{ github.server_url }}/${{ github.triggering_actor }}
     steps:
       - name: Run echo
-        run: echo '${{ needs.tests.outputs }}'
+        run: echo '${{ toJson( needs.tests.outputs ) || "cant display" }}'
       - name: Notify to Mchat
         if: always()
         uses: CODE-Actions/8398a7-action-slack@v3
