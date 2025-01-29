@@ -56,7 +56,12 @@ jobs:
           echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/ghActionsTest
           chmod 600 ~/.ssh/ghActionsTest
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global core.sshCommand "ssh -i ~/.ssh/ghActionsTest -o StrictHostKeyChecking=no"
 
+      - name: Test SSH Connection
+        run: |
+          ssh -i ~/.ssh/ghActionsTest -T git@github.com
+      
       - name: Push to destination repository
         run: |
           git remote set-url origin git@github.com:HajMichal/GithubActionsTesting.git
